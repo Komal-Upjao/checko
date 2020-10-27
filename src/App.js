@@ -11,7 +11,7 @@ function App() {
         <StepProgressBar />
       </div>
       <div className="footer">
-        <a href='https://play.google.com/store/apps/details?id=com.transpacks.Checko1&hl=en_IN&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' alt="Checko App" src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' /></a>
+        <a href='https://play.google.com/store/apps/details?id=com.transpacks.Checko1&hl=en_IN&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play'  src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' /></a>
       </div>
     </div>
   );
