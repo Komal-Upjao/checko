@@ -6,15 +6,47 @@ import Loader from 'react-loader-spinner'
 
 const proxyurl = "https://cors-anywhere.herokuapp.com/"
 
-function verify() {
+// function DataURIToBlob(dataURI) {
+//     const splitDataURI = dataURI.split(',')
+//     const byteString = splitDataURI[0].indexOf('base64') >= 0 ? atob(splitDataURI[1]) : decodeURI(splitDataURI[1])
+//     const mimeString = splitDataURI[0].split(':')[1].split(';')[0]
+
+//     const ia = new Uint8Array(byteString.length)
+//     for (let i = 0; i < byteString.length; i++)
+//         ia[i] = byteString.charCodeAt(i)
+
+//     return new Blob([ia], { type: mimeString })
+// }
+
+// function verify(imgBase64) {
+//     var formdata = new FormData();
+//     const file = DataURIToBlob(imgBase64)
+//     formdata.append("input-image", file, 'image.jpg');
+
+//     var requestOptions = {
+//         method: 'POST',
+//         body: formdata,
+//         redirect: 'follow',
+//     };
+
+//     const urlParams = new URLSearchParams(window.location.search)
+//     const code = urlParams.get('code')
+//     fetch(proxyurl + "https://asia-south1-checko-backend.cloudfunctions.net/match-image?alphanumeric-key=" + code + "&type=preview", requestOptions)
+//         .then(response => response.text())
+//         .then(result => console.log(result))
+//         .catch(error => console.log('error', error));
+// }
+
+
+function verifyBackup() {
     fetch("/C:/Users/devse/Downloads/barcode_roll11_J00007a0_405_0_sheet_405_row_7_col_5 (1).bmp")
         .then(res => res.blob())
         .then(blob => {
-            const file = new File([blob], "capture.png", {
+            const file = new File([blob], "/C:/Users/devse/Downloads/barcode_roll11_J00007a0_405_0_sheet_405_row_7_col_5 (1).bmp", {
                 type: 'image/bmp'
             });
             var formdata = new FormData();
-            formdata.append("input-image", file, "/C:/Users/devse/Downloads/barcode_roll11_J00007a0_405_0_sheet_405_row_7_col_5 (1).bmp");
+            formdata.append("image_data", ``);
 
             var requestOptions = {
                 method: 'POST',
@@ -35,6 +67,7 @@ function verify() {
 
 
 
+
 export class Main extends Component {
 
     checkState = (index) => {
@@ -49,7 +82,7 @@ export class Main extends Component {
     }
 
     partialVerification = () => {
-        fetch(proxyurl + 'https://asia-south1-checko-backend.cloudfunctions.net/match-qr?alphanumeric-key=J00007a0')
+        fetch('https://asia-south1-checko-backend.cloudfunctions.net/match-qr?alphanumeric-key=J00007a0')
             .then(res => res.json())
             .then(response => {
                 console.log(response.qr_result)
@@ -84,7 +117,8 @@ export class Main extends Component {
     }
 
     componentDidMount() {
-        // this.partialVerification()
+        this.partialVerification()
+        // after 2 seconds set partially verified to true should be replaced by API 
         setTimeout(() => {
             this.setState({
                 partiallyVerified: true
@@ -125,7 +159,7 @@ export class Main extends Component {
                 <canvas id="confetti-canvas" />
                 <div className="confetti-text">Verified!</div>
                 <div className="header">
-                    <img src={logo} alt="Checko" />
+                    <img src={logo} alt="Checko"  />
                 </div>
                 <div className="body">
                     {
